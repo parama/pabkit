@@ -1,1 +1,1 @@
-# core.py - Placeholder content
+# core.py - Actual content from coding session

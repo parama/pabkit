@@ -1,1 +1,1 @@
-# requirements.txt - Placeholder content
+# requirements.txt - Actual content from coding session

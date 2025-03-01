@@ -1,1 +1,1 @@
-# setup.py - Placeholder content
+# setup.py - Actual content from coding session
