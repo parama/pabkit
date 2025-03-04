@@ -1,0 +1,41 @@
+# config.yaml - Example configuration for CIFAR-10 experiment
+experiment:
+  name: cifar10_resnet18
+  description: Process-Aware Benchmarking with ResNet-18 on CIFAR-10
+  seed: 42
+  device: cuda
+
+data:
+  dataset: cifar10
+  data_dir: ./data
+  batch_size: 128
+  num_workers: 4
+
+model:
+  architecture: resnet18
+  pretrained: false
+  num_classes: 10
+
+training:
+  epochs: 100
+  optimizer: adam
+  learning_rate: 0.001
+  momentum: 0.9
+  weight_decay: 1e-4
+  lr_scheduler: cosine
+  step_size: 30
+  gamma: 0.1
+  milestones: [30, 60, 90]
+
+pab:
+  checkpoint_dir: ./pab_checkpoints/cifar10_resnet18
+  save_frequency: 5
+  track_representations: true
+  adversarial_test: true
+  epsilon: 0.03
+
+output:
+  results_dir: ./pab_results/cifar10_resnet18
+  save_model: true
+  save_metrics: true
+  plot_metrics: true
