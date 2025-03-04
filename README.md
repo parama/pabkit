@@ -13,6 +13,63 @@ Traditional machine learning benchmarks focus on static evaluation, judging mode
 
 Process-Aware Benchmarking (PAB) addresses these limitations by tracking the entire learning trajectory, providing deeper insights into model behavior and generalization capabilities.
 
+## File Organization
+
+```
+pabkit/
+├── README.md                     # Project overview and usage instructions
+├── setup.py                      # Package installation configuration
+├── requirements.txt              # Package dependencies
+├── LICENSE                       # MIT License
+├── MANIFEST.in                   # Distribution manifest
+│
+├── pab/                          # Main package directory
+│   ├── __init__.py               # Package initialization and imports
+│   ├── core.py                   # Core PAB functionality and classes
+│   ├── metrics.py                # Metrics calculations for trajectory analysis
+│   ├── visualization.py          # Plotting and visualization utilities
+│   ├── utils.py                  # Helper functions and utilities
+│   ├── cli.py                    # Command-line interface
+│   │
+│   ├── tracking/                 # Model checkpoint tracking
+│   │   ├── __init__.py
+│   │   └── checkpoint_manager.py
+│   │
+│   ├── adversarial/              # Adversarial attack utilities
+│   │   └── __init__.py
+│   │
+│   ├── datasets/                 # Dataset utilities
+│   │   ├── __init__.py
+│   │   └── imagenet.py
+│   │
+│   └── config/                   # Configuration management
+│       ├── __init__.py
+│       └── default_config.py
+│
+├── bin/                          # Command-line scripts
+│   └── pab-cli                   # CLI entry point
+│
+├── examples/                     # Example scripts
+│   ├── __init__.py
+│   ├── simple_example.py         # Basic usage with CIFAR-10
+│   ├── imagenet_case_study.py    # ImageNet case study from the paper
+│   ├── model_comparison.py       # Comparing multiple models
+│   ├── representation_analysis.py # Feature representation analysis
+│   ├── comparative_analysis.py   # In-depth comparative analysis
+│   └── pab_tutorial.ipynb        # Jupyter notebook tutorial
+│
+├── tests/                        # Unit tests
+│   ├── __init__.py
+│   ├── test_core.py
+│   ├── test_metrics.py
+│   └── test_tracking.py
+│
+└── docs/                         # Documentation
+    ├── usage.md                  # Detailed usage instructions
+    ├── mathematical_formalism.md # Mathematical foundations of PAB
+    └── api_reference.md          # API reference documentation
+```
+
 ## Installation
 
 ```bash
@@ -149,51 +206,41 @@ fig = plot_class_progression(
 )
 ```
 
-## Advanced Usage
+## Command-Line Interface
 
-### Adversarial Robustness Tracking
+PAB provides a command-line interface for common tasks:
 
-```python
-from pab.utils import evaluate_adversarial_robustness
+```bash
+# Analyze checkpoints from a trained model
+pab-cli analyze --checkpoint_dir ./checkpoints --output_dir ./results
 
-# Track adversarial robustness
-adversarial_metrics = evaluate_adversarial_robustness(
-    model=model,
-    clean_loader=test_loader,
-    epsilon=0.03
-)
+# Compare multiple models
+pab-cli compare --model_dirs ./checkpoints/model1 ./checkpoints/model2 --model_names ResNet50 EfficientNet
 
-# Add to PAB metrics
-pab.metrics['adversarial_robustness'].append(adversarial_metrics['adversarial_accuracy'])
+# Visualize metrics
+pab-cli visualize --metrics_file ./results/pab_metrics.json --type learning_curve
+
+# Generate a comprehensive report
+pab-cli report --checkpoint_dir ./checkpoints --model_name ResNet50
 ```
 
-### Feature Representation Analysis
+## Examples
 
-```python
-from pab.utils import get_feature_extractor
+Explore the `examples/` directory for detailed examples:
 
-# Create feature extractor
-feature_extractor = get_feature_extractor(
-    model=model,
-    loader=test_loader,
-    layer_name='layer4'  # For ResNet
-)
+- `simple_example.py`: Basic usage with CIFAR-10
+- `imagenet_case_study.py`: ImageNet case study from the paper
+- `model_comparison.py`: Comparing multiple models
+- `representation_analysis.py`: Feature representation analysis
+- `pab_tutorial.ipynb`: Jupyter notebook tutorial
 
-# Track representation evolution
-representations = feature_extractor(model)
-```
+## Documentation
 
-### Comparing Models
+Refer to the `docs/` directory for detailed documentation:
 
-```python
-from pab import compare_models
-
-# Compare models using PAB metrics
-results = compare_models(
-    model_dirs=['./checkpoints/model1', './checkpoints/model2'],
-    names=['ResNet18', 'EfficientNet']
-)
-```
+- `usage.md`: Detailed usage instructions
+- `mathematical_formalism.md`: Mathematical foundations of PAB
+- `api_reference.md`: API reference documentation
 
 ## Contributing
 
