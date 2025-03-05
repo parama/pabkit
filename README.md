@@ -79,7 +79,7 @@ pip install pabkit
 Or install from source:
 
 ```bash
-git clone https://github.com/yourusername/pabkit.git
+git clone https://github.com/parama/pabkit.git
 cd pabkit
 pip install -e .
 ```
