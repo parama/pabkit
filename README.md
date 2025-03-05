@@ -246,19 +246,4 @@ Refer to the `docs/` directory for detailed documentation:
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## Citation
-
-If you use the PAB toolkit in your research, please cite:
-
-```
-@article{pab2025,
-  title={Process-Aware Benchmarking: A Novel, Theoretically Grounded Approach to Benchmarking for Modern Machine Learning},
-  author={Pal, Parama},
-  journal={SIGKDD 2025},
-  year={2025}
-}
-```
-
-## License
-
 This project is licensed under the MIT License - see the LICENSE file for details.
